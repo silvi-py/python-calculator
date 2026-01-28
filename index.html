@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator - Silvestar Churenski</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .calculator {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            width: 350px;
+        }
+        
+        .author {
+            color: #ffffff;
+            font-size: 12px;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+        
+        .screen {
+            background: #1a1a1a;
+            color: #ffffff;
+            font-size: 36px;
+            padding: 20px;
+            text-align: right;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        
+        button {
+            padding: 25px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #ffffff;
+        }
+        
+        button:hover {
+            transform: scale(1.05);
+        }
+        
+        .number {
+            background: #333333;
+        }
+        
+        .operator {
+            background: #ff9500;
+        }
+        
+        .special {
+            background: #a6a6a6;
+            color: #000000;
+        }
+        
+        .zero {
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="author">SILVESTAR CHURENSKI</div>
+        <div class="screen" id="screen">0</div>
+        <div class="buttons">
+            <button class="special" onclick="clearScreen()">C</button>
+            <button class="special" onclick="backspace()">⌫</button>
+            <button class="operator" onclick="appendOperator('/')">÷</button>
+            <button class="operator" onclick="appendOperator('*')">×</button>
+            
+            <button class="number" onclick="appendNumber('7')">7</button>
+            <button class="number" onclick="appendNumber('8')">8</button>
+            <button class="number" onclick="appendNumber('9')">9</button>
+            <button class="operator" onclick="appendOperator('-')">-</button>
+            
+            <button class="number" onclick="appendNumber('4')">4</button>
+            <button class="number" onclick="appendNumber('5')">5</button>
+            <button class="number" onclick="appendNumber('6')">6</button>
+            <button class="operator" onclick="appendOperator('+')">+</button>
+            
+            <button class="number" onclick="appendNumber('1')">1</button>
+            <button class="number" onclick="appendNumber('2')">2</button>
+            <button class="number" onclick="appendNumber('3')">3</button>
+            <button class="operator" onclick="calculate()" style="grid-row: span 2;">=</button>
+            
+            <button class="number zero" onclick="appendNumber('0')">0</button>
+            <button class="number" onclick="appendNumber('.')">.</button>
+        </div>
+    </div>
+
+    <script>
+        let currentNumber = '0';
+        
+        function updateScreen() {
+            document.getElementById('screen').textContent = currentNumber;
+        }
+        
+        function appendNumber(num) {
+            if (currentNumber === '0') {
+                currentNumber = num;
+            } else {
+                currentNumber += num;
+            }
+            updateScreen();
+        }
+        
+        function appendOperator(op) {
+            currentNumber += op;
+            updateScreen();
+        }
+        
+        function clearScreen() {
+            currentNumber = '0';
+            updateScreen();
+        }
+        
+        function backspace() {
+            if (currentNumber.length > 1) {
+                currentNumber = currentNumber.slice(0, -1);
+            } else {
+                currentNumber = '0';
+            }
+            updateScreen();
+        }
+        
+        function calculate() {
+            try {
+                currentNumber = eval(currentNumber).toString();
+                updateScreen();
+            } catch {
+                currentNumber = 'Error';
+                updateScreen();
+            }
+        }
+    </script>
+</body>
+</html>
+```
