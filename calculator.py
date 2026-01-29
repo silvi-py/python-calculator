@@ -1,104 +1,143 @@
+"""
+Simple Calculator - SILVESTAR CHURENSKI
+"""
+
 import tkinter as tk
-from tkinter import font
 
 # Create main window
 window = tk.Tk()
-window.title("Modern Calculator - SILVESTAR CHURENSKI")
-window.geometry("400x600")
-window.configure(bg="#1a1a1a")
+window.title("Python Calculator - Silvestar Churenski")
+window.geometry("350x500")
+window.configure(bg="black")
 
-# Fonts
-large_font = font.Font(family="Arial", size=24, weight="bold")
-normal_font = font.Font(family="Arial", size=18)
-small_font = font.Font(family="Arial", size=12)
+# Display text
+display_text = "0"
 
-# Screen
-screen_frame = tk.Frame(window, bg="#1a1a1a", height=150)
-screen_frame.pack(fill="both", padx=20, pady=(20, 10))
+# Functions
+def add_number(number):
+    global display_text
+    if display_text == "0" or display_text == "Error":
+        display_text = str(number)
+    else:
+        display_text += str(number)
+    display_label.config(text=display_text)
+
+def add_operation(op):
+    global display_text
+    display_text += op
+    display_label.config(text=display_text)
+
+def calculate():
+    global display_text
+    try:
+        expression = display_text.replace('÷', '/').replace('×', '*')
+        result = eval(expression)
+        display_text = str(result)
+    except:
+        display_text = "Error"
+    display_label.config(text=display_text)
+
+def clear_screen():
+    global display_text
+    display_text = "0"
+    display_label.config(text=display_text)
+
+def backspace():
+    global display_text
+    if len(display_text) > 1:
+        display_text = display_text[:-1]
+    else:
+        display_text = "0"
+    display_label.config(text=display_text)
+
+# Display
+display_label = tk.Label(
+    window,
+    text=display_text,
+    font=("Arial", 36),
+    bg="black",
+    fg="white",
+    width=15,
+    height=2
+)
+display_label.pack(pady=20)
 
 # Author name
 author_label = tk.Label(
-    screen_frame,
-    text="SILVESTAR CHURENSKI",
-    font=small_font,
-    fg="#ffffff",
-    bg="#1a1a1a"
+    window,
+    text="SILVESTAR CHURENSKI - Python Calculator",
+    font=("Arial", 10),
+    bg="black",
+    fg="white"
 )
-author_label.pack(anchor="ne")
+author_label.pack()
 
-# Result display
-result_label = tk.Label(
-    screen_frame,
-    text="0",
-    font=large_font,
-    fg="#ffffff",
-    bg="#1a1a1a",
-    anchor="e"
-)
-result_label.pack(fill="both", expand=True)
+# Buttons frame
+buttons_frame = tk.Frame(window, bg="black")
+buttons_frame.pack(pady=20)
 
-# Variables
-current_number = "0"
-
-# Functions
-def number_click(number):
-    global current_number
-    if current_number == "0":
-        current_number = str(number)
+# Button colors
+def get_color(text):
+    if text in ["C", "⌫"]:
+        return "#a6a6a6", "black"  # Light gray
+    elif text in ["÷", "×", "-", "+", "="]:
+        return "white", "black"     # White
     else:
-        current_number += str(number)
-    result_label.config(text=current_number)
-
-def clear():
-    global current_number
-    current_number = "0"
-    result_label.config(text="0")
-
-def calculate():
-    global current_number
-    try:
-        result = eval(current_number)
-        current_number = str(result)
-        result_label.config(text=current_number)
-    except:
-        current_number = "Error"
-        result_label.config(text="Error")
+        return "#333333", "white"   # Dark gray
 
 # Buttons
-button_frame = tk.Frame(window, bg="#1a1a1a")
-button_frame.pack(fill="both", expand=True, padx=20, pady=10)
-
 buttons = [
-    ("C", 0, 0, clear), ("7", 1, 0, lambda: number_click(7)), ("4", 2, 0, lambda: number_click(4)), ("1", 3, 0, lambda: number_click(1)),
-    ("⌫", 0, 1, lambda: number_click("")), ("8", 1, 1, lambda: number_click(8)), ("5", 2, 1, lambda: number_click(5)), ("2", 3, 1, lambda: number_click(2)),
-    ("÷", 0, 2, lambda: number_click("/")), ("9", 1, 2, lambda: number_click(9)), ("6", 2, 2, lambda: number_click(6)), ("3", 3, 2, lambda: number_click(3)),
-    ("×", 0, 3, lambda: number_click("*")), ("-", 1, 3, lambda: number_click("-")), ("+", 2, 3, lambda: number_click("+")), ("=", 3, 3, calculate),
-    ("0", 4, 0, lambda: number_click(0)), (".", 4, 1, lambda: number_click(".")),
+    ["C", "⌫", "÷", "×"],
+    ["7", "8", "9", "-"],
+    ["4", "5", "6", "+"],
+    ["1", "2", "3", "="],
+    ["0", ".", "", ""]
 ]
 
-for text, row, col, command in buttons:
-    if text in ["C", "⌫"]:
-        color = "#a6a6a6"
-    elif text in ["÷", "×", "-", "+", "="]:
-        color = "#ff9500"
-    else:
-        color = "#333333"
-    
-    btn = tk.Button(
-        button_frame,
-        text=text,
-        font=normal_font,
-        bg=color,
-        fg="#ffffff" if color != "#a6a6a6" else "#000000",
-        command=command
-    )
-    btn.grid(row=row, column=col, sticky="nsew", padx=5, pady=5, ipadx=10, ipady=20)
-
-# Configure grid
-for i in range(5):
-    button_frame.grid_rowconfigure(i, weight=1)
-for i in range(4):
-    button_frame.grid_columnconfigure(i, weight=1)
+# Create buttons
+for row in range(5):
+    for col in range(4):
+        text = buttons[row][col]
+        if text:
+            bg_color, fg_color = get_color(text)
+            
+            # Commands
+            if text == "C":
+                command = clear_screen
+            elif text == "⌫":
+                command = backspace
+            elif text == "=":
+                command = calculate
+            elif text in ["÷", "×", "-", "+"]:
+                command = lambda t=text: add_operation(t)
+            else:
+                command = lambda t=text: add_number(t)
+            
+            # Create button
+            if text == "0":
+                button = tk.Button(
+                    buttons_frame,
+                    text=text,
+                    font=("Arial", 18),
+                    bg=bg_color,
+                    fg=fg_color,
+                    command=command,
+                    width=8,
+                    height=2
+                )
+                button.grid(row=row, column=col, columnspan=2, padx=5, pady=5)
+            else:
+                button = tk.Button(
+                    buttons_frame,
+                    text=text,
+                    font=("Arial", 18),
+                    bg=bg_color,
+                    fg=fg_color,
+                    command=command,
+                    width=4,
+                    height=2
+                )
+                button.grid(row=row, column=col, padx=5, pady=5)
 
 # Run
 window.mainloop()
