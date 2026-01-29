@@ -1,37 +1,29 @@
-# Python Calculator 🧮
+# 🧮 Calculator Projects - SILVESTAR CHURENSKI
 
-My first Python project - a simple calculator with GUI.
+Hello, I'm Silvestar Churenski, a 16-year-old who has just stepped into the world of software development. I live in Germany, go to school, and also try to improve myself in the IT field. On the one hand, I'm looking for an apprenticeship (Ausbildung) that I can lean towards.
 
-![Calculator Screenshot](screenshot.png)
+This is my first GitHub project. As I said, my short-term desire is to find an Ausbildung, learn, focus on an area, and improve myself.
 
-## 🎯 What I Built
-A basic calculator with:
-- Addition, Subtraction, Multiplication, Division
-- Modern dark/iphone theme
-- Built with Python Tkinter
+In the long term, it's currently AI/ML Engineering/Data Science.
 
-## 🛠️ Tech Used
-- Python 3
-- Tkinter (GUI)
+## 📚 About the Project
 
-## 🚀 Try It Live
-👉 
+This repo contains calculators I developed with two different technologies:
 
-## 📦 How to Run Locally
-```bash
-python calculator.py
-```
+1. **Web Calculator** - with HTML, CSS, JavaScript
+2. **Python Calculator** - with Python and Tkinter
 
-## 📚 What I Learned
-- Python basics (functions, variables)
-- HTML/CSS (average)
-- GUI with Tkinter
-- Event handling (button clicks)
-- Basic calculations with `eval()`
+## 🎯 Learning Goals
 
-## 👨‍💻 Author
-**Silvestar Churenski** - First coding project!
+- Learn basic programming concepts
+- Experience different technologies
+- Learn how to use GitHub
+- Create a portfolio
 
----
+## 🚀 Future Plans
 
-*Built while learning Python | January 2026*
+- Develop AI/ML projects
+- Advance in the field of data science
+- Contribute to open source projects
+
+*"Every expert was once a beginner. With this first step I take today, I am on my way to becoming tomorrow's AI engineer."*
