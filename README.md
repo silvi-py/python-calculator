@@ -16,6 +16,8 @@ They both do the same thing - basic math operations. Nothing fancy but they work
 
 **For the web version:**
 Just download `index.html` and open it in your browser
+You can use the live HTML version through this link:
+https://silvi-py.github.io/python-calculator/
 
 **For the Python version:**
 You need Python installed, then just run:
