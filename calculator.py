@@ -1,7 +1,6 @@
 """
 Simple Calculator - SILVESTAR CHURENSKI
 """
-
 import tkinter as tk
 
 # Create main window
@@ -10,80 +9,125 @@ window.title("Python Calculator - Silvestar Churenski")
 window.geometry("350x500")
 window.configure(bg="black")
 
-# Display text
-display_text = "0"
+# Variables
+currentNumber = "0"
+firstNumber = None
+operator = None
+waitingForSecondNumber = False
 
 # Functions
-def add_number(number):
-    global display_text
-    if display_text == "0" or display_text == "Error":
-        display_text = str(number)
-    else:
-        display_text += str(number)
-    display_label.config(text=display_text)
+def updateScreen():
+    displayLabel.config(text=currentNumber)
 
-def add_operation(op):
-    global display_text
-    display_text += op
-    display_label.config(text=display_text)
+def addNumber(number):
+    global currentNumber, waitingForSecondNumber
+    
+    if currentNumber == "0" or currentNumber == "Error" or waitingForSecondNumber:
+        currentNumber = str(number)
+        waitingForSecondNumber = False
+    else:
+        if number == "." and "." in currentNumber:
+            return
+        currentNumber += str(number)
+    
+    updateScreen()
+
+def addOperator(op):
+    global firstNumber, operator, waitingForSecondNumber
+    
+    if operator is not None and not waitingForSecondNumber:
+        calculate()
+    
+    firstNumber = float(currentNumber)
+    operator = op
+    waitingForSecondNumber = True
 
 def calculate():
-    global display_text
-    try:
-        expression = display_text.replace('÷', '/').replace('×', '*')
-        result = eval(expression)
-        display_text = str(result)
-    except:
-        display_text = "Error"
-    display_label.config(text=display_text)
+    global currentNumber, firstNumber, operator, waitingForSecondNumber
+    
+    if operator is None or firstNumber is None:
+        return
+    
+    secondNumber = float(currentNumber)
+    result = None
+    
+    if operator == "+":
+        result = firstNumber + secondNumber
+    elif operator == "-":
+        result = firstNumber - secondNumber
+    elif operator == "×":
+        result = firstNumber * secondNumber
+    elif operator == "÷":
+        if secondNumber == 0:
+            currentNumber = "Error"
+            updateScreen()
+            return
+        result = firstNumber / secondNumber
+    
+    result = round(result, 8)
+    
+    if result == int(result):
+        currentNumber = str(int(result))
+    else:
+        currentNumber = str(result)
+    
+    operator = None
+    firstNumber = None
+    waitingForSecondNumber = True
+    updateScreen()
 
-def clear_screen():
-    global display_text
-    display_text = "0"
-    display_label.config(text=display_text)
+def clearScreen():
+    global currentNumber, firstNumber, operator, waitingForSecondNumber
+    currentNumber = "0"
+    firstNumber = None
+    operator = None
+    waitingForSecondNumber = False
+    updateScreen()
 
 def backspace():
-    global display_text
-    if len(display_text) > 1:
-        display_text = display_text[:-1]
+    global currentNumber
+    
+    if len(currentNumber) > 1 and currentNumber != "Error":
+        currentNumber = currentNumber[:-1]
     else:
-        display_text = "0"
-    display_label.config(text=display_text)
+        currentNumber = "0"
+    
+    updateScreen()
 
 # Display
-display_label = tk.Label(
+displayLabel = tk.Label(
     window,
-    text=display_text,
+    text=currentNumber,
     font=("Arial", 36),
     bg="black",
     fg="white",
     width=15,
     height=2
 )
-display_label.pack(pady=20)
+displayLabel.pack(pady=20)
 
 # Author name
-author_label = tk.Label(
+authorLabel = tk.Label(
     window,
     text="SILVESTAR CHURENSKI - Python Calculator",
     font=("Arial", 10),
     bg="black",
     fg="white"
 )
-author_label.pack()
+authorLabel.pack()
 
 # Buttons frame
-buttons_frame = tk.Frame(window, bg="black")
-buttons_frame.pack(pady=20)
+buttonsFrame = tk.Frame(window, bg="black")
+buttonsFrame.pack(pady=20)
 
 # Button colors
-def get_color(text):
+def getColor(text):
     if text in ["C", "⌫"]:
-        return "#a6a6a6", "black"  # Light gray
+        return "#a6a6a6", "black"
     elif text in ["÷", "×", "-", "+", "="]:
-        return "white", "black"     # White
+        return "white", "black"
     else:
-        return "#333333", "white"   # Dark gray
+        return "#333333", "white"
 
 # Buttons
 buttons = [
@@ -99,28 +143,26 @@ for row in range(5):
     for col in range(4):
         text = buttons[row][col]
         if text:
-            bg_color, fg_color = get_color(text)
+            bgColor, fgColor = getColor(text)
             
-            # Commands
             if text == "C":
-                command = clear_screen
+                command = clearScreen
             elif text == "⌫":
                 command = backspace
             elif text == "=":
                 command = calculate
             elif text in ["÷", "×", "-", "+"]:
-                command = lambda t=text: add_operation(t)
+                command = lambda t=text: addOperator(t)
             else:
-                command = lambda t=text: add_number(t)
+                command = lambda t=text: addNumber(t)
             
-            # Create button
             if text == "0":
                 button = tk.Button(
-                    buttons_frame,
+                    buttonsFrame,
                     text=text,
                     font=("Arial", 18),
-                    bg=bg_color,
-                    fg=fg_color,
+                    bg=bgColor,
+                    fg=fgColor,
                     command=command,
                     width=8,
                     height=2
@@ -128,11 +170,11 @@ for row in range(5):
                 button.grid(row=row, column=col, columnspan=2, padx=5, pady=5)
             else:
                 button = tk.Button(
-                    buttons_frame,
+                    buttonsFrame,
                     text=text,
                     font=("Arial", 18),
-                    bg=bg_color,
-                    fg=fg_color,
+                    bg=bgColor,
+                    fg=fgColor,
                     command=command,
                     width=4,
                     height=2
