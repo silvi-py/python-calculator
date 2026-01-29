@@ -1,29 +1,43 @@
-# 🧮 Calculator Projects - SILVESTAR CHURENSKI
+# Calculator Projects
 
-Hello, I'm Silvestar Churenski, a 16-year-old who has just stepped into the world of software development. I live in Germany, go to school, and also try to improve myself in the IT field. On the one hand, I'm looking for an apprenticeship (Ausbildung) that I can lean towards.
+Hi! I'm Silvestar Churenski, 16 years old from Germany. This is my first real project that I'm sharing on GitHub.
 
-This is my first GitHub project. As I said, my short-term desire is to find an Ausbildung, learn, focus on an area, and improve myself.
+I started learning programming a few months ago, and I'm still in school. Right now I'm trying to find an Ausbildung in IT because I really want to get better at this. Long term goal is to work with AI and machine learning, but I know I need to learn the basics first.
 
-In the long term, it's currently AI/ML Engineering/Data Science.
+## What's in here
 
-## 📚 About the Project
+I built two simple calculators to practice:
+- **Web Calculator** - made with HTML, CSS and JavaScript
+- **Python Calculator** - made with Python and Tkinter
 
-This repo contains calculators I developed with two different technologies:
+They both do the same thing - basic math operations. Nothing fancy but they work and I learned a lot making them.
 
-1. **Web Calculator** - with HTML, CSS, JavaScript
-2. **Python Calculator** - with Python and Tkinter
+## How to use it
 
-## 🎯 Learning Goals
+**For the web version:**
+Just download `index.html` and open it in your browser
 
-- Learn basic programming concepts
-- Experience different technologies
-- Learn how to use GitHub
-- Create a portfolio
+**For the Python version:**
+You need Python installed, then just run:
+```
+python calculator.py
+```
 
-## 🚀 Future Plans
+## What I learned
 
-- Develop AI/ML projects
-- Advance in the field of data science
-- Contribute to open source projects
+- How to handle user input
+- Making buttons actually do something
+- Basic arithmetic in code
+- How to make things look decent (dark theme!)
+- Git and GitHub (still figuring this out honestly)
 
-*"Every expert was once a beginner. With this first step I take today, I am on my way to becoming tomorrow's AI engineer."*
+## What's next
+
+I want to keep building more projects and get better at coding. Maybe next I'll try something with APIs or a to-do app. We'll see.
+
+If you have any feedback or tips, feel free to let me know!
+
+---
+
+**Started learning:** November 2025  
+**This project:** January 2026
