@@ -1,9 +1,6 @@
 # Calculator Projects
 
-Hi! I'm Silvestar Churenski, 16 years old from Germany. This is my first real project that I'm sharing on GitHub.
-
-I started learning programming a few months ago, and I'm still in school. Right now I'm trying to find an Ausbildung in IT because I really want to get better at this. Long term goal is to work with AI and machine learning, but I know I need to learn the basics first.
-
+Hello, I am Silvestar Churenski, a 16-year-old living in München, Germany. This is my first real project that I have shared on GitHub. I started learning programming a few months ago and I'm still a school goer I'm currently trying to find an Ausbildung in the fields I'm interested in, software is one of the flours because I really want to get better at it. and improve myself day by day
 ## What's in here
 
 I built two simple calculators to practice:
